@@ -44,3 +44,5 @@ cd catkin_ws
 source devel/setup.bash
 rosrun beginner_tutorials listener
 ```
+
+To stop the program press ctrl+C in each of the three terminals.
