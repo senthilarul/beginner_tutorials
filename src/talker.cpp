@@ -48,15 +48,15 @@
 #include "std_msgs/String.h"
 #include "beginner_tutorials/modifyText.h"
 
-std::string defaultMessage = "Default Message ";
+extern std::string defaultMessage = "Default Message ";
 
 bool modifyDefaultText(beginner_tutorials::modifyText::Request& request,
 beginner_tutorials::modifyText::Response& response) {
-
-defaultMessage = request.inputString;
-response.modifiedString = "The User modified default string to: " + request.inputString;
-ROS_WARN_STREAM("User has changed the default message");
-return true;
+    defaultMessage = request.inputString;
+    response.modifiedString = "The User modified default string to: " +
+    request.inputString;
+    ROS_WARN_STREAM("User has changed the default message");
+    return true;
 }
 /**
  * This tutorial demonstrates simple sending of messages over the ROS system.
@@ -82,18 +82,17 @@ int main(int argc, char **argv) {
    * NodeHandle destructed will close down the node.
    */
 
-    int loopFreq = 10;
+    int loopFreq;
     loopFreq = atoi(argv[1]);
     ROS_DEBUG_STREAM("User Input Frequency is: " << loopFreq);
-    if(loopFreq < 0) {
+    if (loopFreq < 0) {
         ROS_ERROR_STREAM("The Input Frequency is negative");
-        ROS_WARN_STREAM("Setting Loop Frequency to default value 10Hz");
+        ROS_WARN_STREAM("Setting Loop Frequency to default value of 10Hz");
         loopFreq = 10;
-    }
-    else if(loopFreq == 0) {
-       ROS_FATAL_STREAM("Input Frequency set as 0 or a non-integer");
-       ROS_WARN_STREAM("Setting Loop Frequency to default value 10Hz");
-       loopFreq = 10;
+    }  else if (loopFreq == 0) {
+           ROS_FATAL_STREAM("Input Frequency set as 0 or a non-integer");
+           ROS_WARN_STREAM("Setting Loop Frequency to default value 10Hz");
+           loopFreq = 10;
     }
 
 
@@ -125,7 +124,7 @@ int main(int argc, char **argv) {
   auto chatter_pub = n.advertise<std_msgs::String>("chatter", 1000);
 // %EndTag(PUBLISHER)%
 
-  auto server = n.advertiseService("modifyText",modifyDefaultText);
+  auto server = n.advertiseService("modifyText", modifyDefaultText);
 
 // %Tag(LOOP_RATE)%
   ros::Rate loop_rate(loopFreq);
