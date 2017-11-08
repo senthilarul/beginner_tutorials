@@ -55,6 +55,7 @@ beginner_tutorials::modifyText::Response& response) {
 
 defaultMessage = request.inputString;
 response.modifiedString = "The User modified default string to: " + request.inputString;
+ROS_WARN_STREAM("User has changed the default message");
 return true;
 }
 /**
@@ -80,6 +81,24 @@ int main(int argc, char **argv) {
    * The first NodeHandle constructed will fully initialize this node, and the last
    * NodeHandle destructed will close down the node.
    */
+
+    int loopFreq = 10;
+    loopFreq = atoi(argv[1]);
+    ROS_DEBUG_STREAM("User Input Frequency is: " << loopFreq);
+    if(loopFreq < 0) {
+        ROS_ERROR_STREAM("The Input Frequency is negative");
+        ROS_WARN_STREAM("Setting Loop Frequency to default value 10Hz");
+        loopFreq = 10;
+    }
+    else if(loopFreq == 0) {
+       ROS_FATAL_STREAM("Input Frequency set as 0 or a non-integer");
+       ROS_WARN_STREAM("Setting Loop Frequency to default value 10Hz");
+       loopFreq = 10;
+    }
+
+
+
+
 
 // %Tag(NODEHANDLE)%
   ros::NodeHandle n;
@@ -109,7 +128,7 @@ int main(int argc, char **argv) {
   auto server = n.advertiseService("modifyText",modifyDefaultText);
 
 // %Tag(LOOP_RATE)%
-  ros::Rate loop_rate(10);
+  ros::Rate loop_rate(loopFreq);
 // %EndTag(LOOP_RATE)%
 
   /**
