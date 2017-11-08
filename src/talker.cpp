@@ -48,8 +48,17 @@
 #include "std_msgs/String.h"
 #include "beginner_tutorials/modifyText.h"
 
+/**
+ * The default string for output which can be modified by user
+ */
 extern std::string defaultMessage = "Default Message ";
 
+/**
+ * @brief  Callback function for modifytext Service
+ * @param  request   The request data sent to service
+ * @param  response   The response by the service to request
+ * @return bool
+ */
 bool modifyDefaultText(beginner_tutorials::modifyText::Request& request,
 beginner_tutorials::modifyText::Response& response) {
     defaultMessage = request.inputString;
