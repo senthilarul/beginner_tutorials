@@ -46,7 +46,17 @@
 // %EndTag(ROS_HEADER)%
 // %Tag(MSG_HEADER)%
 #include "std_msgs/String.h"
+#include "beginner_tutorials/modifyText.h"
 
+std::string defaultMessage = "Default Message ";
+
+bool modifyDefaultText(beginner_tutorials::modifyText::Request& request,
+beginner_tutorials::modifyText::Response& response) {
+
+defaultMessage = request.inputString;
+response.modifiedString = "The User modified default string to: " + request.inputString;
+return true;
+}
 /**
  * This tutorial demonstrates simple sending of messages over the ROS system.
  */
@@ -70,6 +80,7 @@ int main(int argc, char **argv) {
    * The first NodeHandle constructed will fully initialize this node, and the last
    * NodeHandle destructed will close down the node.
    */
+
 // %Tag(NODEHANDLE)%
   ros::NodeHandle n;
 // %EndTag(NODEHANDLE)%
@@ -95,6 +106,8 @@ int main(int argc, char **argv) {
   auto chatter_pub = n.advertise<std_msgs::String>("chatter", 1000);
 // %EndTag(PUBLISHER)%
 
+  auto server = n.advertiseService("modifyText",modifyDefaultText);
+
 // %Tag(LOOP_RATE)%
   ros::Rate loop_rate(10);
 // %EndTag(LOOP_RATE)%
@@ -114,7 +127,7 @@ int main(int argc, char **argv) {
     std_msgs::String msg;
 
     std::stringstream ss;
-    ss << "This is Senthil " << count;
+    ss << defaultMessage << count;
     msg.data = ss.str();
 // %EndTag(FILL_MESSAGE)%
 
