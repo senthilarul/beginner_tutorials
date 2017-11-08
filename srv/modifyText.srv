@@ -1,0 +1,5 @@
+#request
+string inputString
+---
+#response
+string modifiedString
