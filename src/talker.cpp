@@ -47,6 +47,7 @@
 // %Tag(MSG_HEADER)%
 #include "std_msgs/String.h"
 #include "beginner_tutorials/modifyText.h"
+#include <tf/transform_broadcaster.h>
 
 /**
  * The default string for output which can be modified by user
@@ -84,6 +85,10 @@ int main(int argc, char **argv) {
 // %Tag(INIT)%
   ros::init(argc, argv, "talker");
 // %EndTag(INIT)%
+
+  // tranform broadcaster object
+  static tf::TransformBroadcaster br;
+  tf::Transform transform;
 
   /**
    * NodeHandle is the main access point to communications with the ROS system.
@@ -173,6 +178,12 @@ int main(int argc, char **argv) {
 // %Tag(PUBLISH)%
     chatter_pub.publish(msg);
 // %EndTag(PUBLISH)%
+
+transform.setOrigin(tf::Vector3(sin(ros::Time::now().toSec()),cos(ros::Time::now().toSec()),0.0));
+tf::Quaternion q;
+q.setRPY(0, 0, 1);
+transform.setRotation(q);
+br.sendTransform(tf::StampedTransform(transform, ros::Time::now(), "world", "talk"));
 
 // %Tag(SPINONCE)%
     ros::spinOnce();
