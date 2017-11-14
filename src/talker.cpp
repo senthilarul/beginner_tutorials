@@ -91,8 +91,10 @@ int main(int argc, char **argv) {
    * NodeHandle destructed will close down the node.
    */
 
-    int loopFreq;
-    loopFreq = atoi(argv[1]);
+    int loopFreq = 10;
+    if(argc == 2) {
+        loopFreq = atoi(argv[1]);
+    }
     ROS_DEBUG_STREAM("User Input Frequency is: " << loopFreq);
     if (loopFreq < 0) {
         ROS_ERROR_STREAM("The Input Frequency is negative");
