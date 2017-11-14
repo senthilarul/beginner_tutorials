@@ -51,7 +51,7 @@
 /**
  * The default string for output which can be modified by user
  */
-extern std::string defaultMessage = "Default Message ";
+std::string defaultMessage = "Default Message ";
 
 /**
  * @brief  Callback function for modifytext Service
