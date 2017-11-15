@@ -44,6 +44,9 @@
 #include <sstream>
 #include <string>
 
+/**
+ *  Structure to store the default string
+ */
 struct DefaultMessage {
     std::string defaultMessage = "default message ";
 };

@@ -173,14 +173,16 @@ int main(int argc, char **argv) {
 // %Tag(PUBLISH)%
     chatter_pub.publish(msg);
 // %EndTag(PUBLISH)%
-
-transform.setOrigin(tf::Vector3(sin(ros::Time::now().toSec()),
-cos(ros::Time::now().toSec()), 0.0));
-tf::Quaternion q;
-q.setRPY(0, 0, 1);
-transform.setRotation(q);
-br.sendTransform(tf::StampedTransform(transform,
-ros::Time::now(), "world", "talk"));
+    // set translational element
+    transform.setOrigin(tf::Vector3(sin(ros::Time::now().toSec()),
+    cos(ros::Time::now().toSec()), 0.0));
+    tf::Quaternion q;
+    q.setRPY(0, 0, 1);
+    // set rotational element
+    transform.setRotation(q);
+    // broadcast the transform
+    br.sendTransform(tf::StampedTransform(transform,
+    ros::Time::now(), "world", "talk"));
 
 // %Tag(SPINONCE)%
     ros::spinOnce();
