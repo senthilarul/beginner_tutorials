@@ -45,7 +45,7 @@
  * @brief  main function for calling tests
  * @param  argc int
  * @param  argv character array
- * @return 0 
+ * @return 0 on successful exit
  */
 
 int main(int argc, char** argv) {
