@@ -4,6 +4,12 @@
 
 An implementation of ROS subscriber publisher node using [ROS tutorial](http://wiki.ros.org/ROS/Tutorials/WritingPublisherSubscriber%28c%2B%2B%29)
 
+Week10 Additions: Added a service modifyText to update the default published text by the talker node.
+
+Week11 Additions: Added Level 2 integration test for talker node modifyText service. The software also has an implementation of tf broadcast of a /talk fram. The launch file is updated to provide functionality to record topics using rosbag.
+
+Overall the software is simple tutorial showcasing the usage of various ROS functionalities and features. It has implementations of publisher subscriber, service, tf broadcast, rosbag and rostest. 
+
 ## Pre-requisite
 The project requires ROS kinectic and catkin, and is developed on UBUNTU 16.04 LTS.
 
@@ -117,6 +123,10 @@ rosrun tf view_frames
 ```
 A .pdf file named frames is generated with the diagram and can be found in the catkin_ws folder. The example frames.pdf file for this software can be found in the results folder.
 
+the pdf can be viewed by entering the following in the terminal
+```
+evince frames.pdf
+```
 press ctrl+C to stop the program in each of the terminals.
 
 ## ROSTEST
