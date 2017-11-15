@@ -49,21 +49,21 @@
  */
 TEST(testTalkerNode, testIfModifyTextExist) {
     ros::NodeHandle nh;
-    ros::ServiceClient client = nh.serviceClient<beginner_tutorials::modifyText>("modifyText");
+    ros::ServiceClient client =
+ nh.serviceClient<beginner_tutorials::modifyText>("modifyText");
     EXPECT_TRUE(client.waitForExistence(ros::Duration(5)));
 }
 /**
  * @brief  tests if modifyText service replaces default text with user input
  */
-
 TEST(testTalkerNode, testTalkerDefaultMessageUpdate) {
     ros::NodeHandle nh;
-    ros::ServiceClient client = nh.serviceClient<beginner_tutorials::modifyText>("modifyText");
+    ros::ServiceClient client =
+ nh.serviceClient<beginner_tutorials::modifyText>("modifyText");
     beginner_tutorials::modifyText::Request request;
     beginner_tutorials::modifyText::Response response;
     request.inputString = "testString";
-    //ROS_FATAL_STREAM(response.modifiedString.c_str());
-    client.call(request,response);
+    client.call(request, response);
     EXPECT_STREQ("testString", response.modifiedString.c_str());
 }
 
