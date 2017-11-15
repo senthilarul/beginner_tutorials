@@ -49,7 +49,7 @@
  */
 TEST(testTalkerNode, testIfModifyTextExist) {
     ros::NodeHandle nh;
-    ros::ServiceClient client =
+    auto client =
  nh.serviceClient<beginner_tutorials::modifyText>("modifyText");
     EXPECT_TRUE(client.waitForExistence(ros::Duration(5)));
 }
@@ -58,7 +58,7 @@ TEST(testTalkerNode, testIfModifyTextExist) {
  */
 TEST(testTalkerNode, testTalkerDefaultMessageUpdate) {
     ros::NodeHandle nh;
-    ros::ServiceClient client =
+    auto client =
  nh.serviceClient<beginner_tutorials::modifyText>("modifyText");
     beginner_tutorials::modifyText::Request request;
     beginner_tutorials::modifyText::Response response;
