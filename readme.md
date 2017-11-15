@@ -33,14 +33,14 @@ roscore
 
 To run talker open a new terminal and type
 ```
-cd catkin_ws
+cd ~/catkin_ws
 source devel/setup.bash
 rosrun beginner_tutorials talker
 ```
 
 To run listener open a new terminal and type
 ```
-cd catkin_ws
+cd ~/catkin_ws
 source devel/setup.bash
 rosrun beginner_tutorials listener
 ```
@@ -49,7 +49,7 @@ To stop the program press ctrl+C in each of the three terminals.
 ## Running Demo using launch file
 To run the demo using launch file type the following in a terminal
 ```
-cd catkin_ws
+cd ~/catkin_ws
 source devel/setup.bash
 roslaunch beginner_tutorials hw10.launch
 ```
@@ -61,7 +61,7 @@ To modify the default text run the demo either using the launch file as mentione
 
 After the demo starts open a new terminal and type
 ```
-cd catkin_ws
+cd ~/catkin_ws
 source devel/setup.bash
 rosservice call /modifyText <your string>
 ```
@@ -76,7 +76,7 @@ rosservice call /modifyText ENPM808X
 ## Change Loop frequency
 To modify the loop frequency open run the demo using launch file by using the following command
 ```
-cd catkin_ws
+cd ~/catkin_ws
 source devel/setup.bash
 roslaunch beginner_tutorials hw10.launch frequency:=<int value greater than 0>
 ```
@@ -112,7 +112,7 @@ rosrun rqt_tf_tree rqt_tf_tree
 view_frames produces a diagram of the broadcasted frame.
 With the demo running type the following in a new terminal
 ```
-cd catkin_ws
+cd ~/catkin_ws
 rosrun tf view_frames
 ```
 A .pdf file named frames is generated with the diagram and can be found in the catkin_ws folder. The example frames.pdf file for this software can be found in the results folder.
@@ -122,7 +122,7 @@ press ctrl+C to stop the program in each of the terminals.
 ## ROSTEST
 To run the test for talker node modifyText service type the following in  terminal.
 ```
-cd catkin_ws
+cd ~/catkin_ws
 source devel/setup.bash
 rostest beginner_tutorials talkerTest.launch 
 ```
@@ -155,14 +155,14 @@ roscore
 ```
 After starting roscore open a new terminal and type the following
 ```
-cd catkin_ws
+cd ~/catkin_ws
 source devel/setup.bash
 rosrun beginner_tutorials listener
 ```
 
 Now open a new terminal and type the following.
 ```
-cd catkin_ws
+cd ~/catkin_ws
 source devel/setup.bash
 cd src/beginner_tutorials/results
 rosbag play recordtopics.bag
@@ -174,7 +174,7 @@ press ctrl+C in each of the terminal to exit the program.
 
 To create a new bag file type
 ```
-cd catkin_ws
+cd ~/catkin_ws
 source devel/setup.bash
 roslaunch beginner_tutorials hw10.launch rosbagEnable:=true
 ```
@@ -183,10 +183,10 @@ press ctrl+C in each terminal window to exit from the program and stop the recor
 
 the new rosbag file can be fould in the .ros directory
 ```
-cd .ros
+cd ~/.ros
 rosbag info recordtopics.bag
 ```
-the above command will list details about the number of nessage and topics recorded. This rosbag file can be played for the listener node (first start the listener node and roscore as mentioned earlier in ROSBAG section) using
+the above command will list details about the message and topics recorded. This rosbag file can be played for the listener node (first start the listener node and roscore as mentioned earlier in ROSBAG section) using
 ```
 rosbag play recordtopics.bag
 ```
