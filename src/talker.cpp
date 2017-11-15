@@ -38,21 +38,17 @@
  * A ROS publisher created from ROS listener/publisher tutorials
  */
 
-// %EndTag(MSG_HEADER)%
-#include <sstream>
-// %Tag(FULLTEXT)%
-// %Tag(ROS_HEADER)%
+#include <tf/transform_broadcaster.h>
+#include "talker.hpp"
 #include "ros/ros.h"
-// %EndTag(ROS_HEADER)%
-// %Tag(MSG_HEADER)%
 #include "std_msgs/String.h"
 #include "beginner_tutorials/modifyText.h"
-#include <tf/transform_broadcaster.h>
 
 /**
  * The default string for output which can be modified by user
  */
-std::string defaultMessage = "Default Message ";
+DefaultMessage m;
+
 
 /**
  * @brief  Callback function for modifytext Service
@@ -62,8 +58,7 @@ std::string defaultMessage = "Default Message ";
  */
 bool modifyDefaultText(beginner_tutorials::modifyText::Request& request,
 beginner_tutorials::modifyText::Response& response) {
-    defaultMessage = request.inputString;
-    //response.modifiedString = "The User modified default string to: " +
+    m.defaultMessage = request.inputString;
     response.modifiedString = request.inputString;
     ROS_WARN_STREAM("User has changed the default message");
     return true;
@@ -97,7 +92,7 @@ int main(int argc, char **argv) {
    */
 
     int loopFreq = 10;
-    if(argc == 2) {
+    if (argc == 2) {
         loopFreq = atoi(argv[1]);
     }
     ROS_DEBUG_STREAM("User Input Frequency is: " << loopFreq);
@@ -161,7 +156,7 @@ int main(int argc, char **argv) {
     std_msgs::String msg;
 
     std::stringstream ss;
-    ss << defaultMessage << count;
+    ss << m.defaultMessage << count;
     msg.data = ss.str();
 // %EndTag(FILL_MESSAGE)%
 
@@ -179,11 +174,13 @@ int main(int argc, char **argv) {
     chatter_pub.publish(msg);
 // %EndTag(PUBLISH)%
 
-transform.setOrigin(tf::Vector3(sin(ros::Time::now().toSec()),cos(ros::Time::now().toSec()),0.0));
+transform.setOrigin(tf::Vector3(sin(ros::Time::now().toSec()),
+cos(ros::Time::now().toSec()), 0.0));
 tf::Quaternion q;
 q.setRPY(0, 0, 1);
 transform.setRotation(q);
-br.sendTransform(tf::StampedTransform(transform, ros::Time::now(), "world", "talk"));
+br.sendTransform(tf::StampedTransform(transform,
+ros::Time::now(), "world", "talk"));
 
 // %Tag(SPINONCE)%
     ros::spinOnce();
