@@ -83,3 +83,77 @@ an example would be
 ```
 roslaunch beginner_tutorials hw10.launch frequency:=5
 ```
+
+## TF Frames
+The talker.cpp node broadcasts the /talk frame which has a non-zero translation and rotation with respect to /world frame. We can verify the TF frames using tf_echo and rqr_tf_tree.
+
+The translation vector in this code is based sine and cosine values of the ros::time, therefore with each loop run the translation value changes.
+On running tf_echo it produces an terminal output showing the value of translation and rotational transformation vectors in each loop run in the talker node.
+
+To run tf_echo type
+```
+rosrun tf tf_echo /world /talk
+```
+
+We can use rqt_tf_tree for visualizing the tree of frames being broadcasted.
+
+To visualize type the follwing in the terminal
+```
+rosrun rqt_tf_tree rqt_tf_tree
+```
+
+view_frames produces a diagramm o fthe broadcasted frame.
+type the following in the terminal
+```
+rosrun tf view_frames
+```
+A .pdf file named frames is generated with the diagram and can be found in the catkin_ws folder. The frames.pdf file for this software can be found in the results folder.
+
+## ROSTEST
+To run the test for talker node modifyText service typw the following in the terminal.
+```
+cd catkin_ws
+source devel/setup.bash
+rostest beginner_tutorials talkerTest.launch 
+```
+
+## ROSBAG
+A bag file recording all topic of duration 15 seconds is available in the results folder.
+To run the listener node using the .bag file type the follwing in to the terminal.
+```
+cd catkin_ws
+source devel/setup.bash
+rosrun beginner_tutorials listener
+```
+
+Now open a new terminal and type the following.
+```
+cd catkin_ws
+source devel/setup.bash
+cd src/beginner_tutorials/results
+rosbag play recordtopics.bag
+```
+
+You can find the terminal running listener node displaying the recorded /chatter topic.
+
+press ctrl+C in both terminal to exit the program.
+
+To create a new bag file type
+```
+cd catkin_ws
+source devel/setup.bash
+roslaunch beginner_tutorials hw10.launch rosbagEnable:=true
+```
+
+press ctrl+C in each terminal window to exit from the program and stop the recording.
+
+the new rosbag file can be fould in the .ros directory
+```
+cd .ros
+rosbag info recordtopics.bag
+```
+the above command will list details about the number of nessage and topics recorded. This rosbag file can be played for the listener node using
+```
+rosbag play recordtopics.bag
+```
+ 
